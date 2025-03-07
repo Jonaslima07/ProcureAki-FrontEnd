@@ -25,7 +25,7 @@ const Carrossels = () => {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://s3-alpha-sig.figma.com/img/5d85/9c50/c022e661921812425d6f6cfaee2afbde?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=lT6TQJCTKO~lFqUAFUOCETNCrsLfxbl41xgQokK3r2BBOq~LuuMM3kXgXaflz7cuIplVBzwn~OQSqJ7BqqG6JsPzeElJBkDRT2UpBVHxmz3Rcq-vFSVX3Vi7b8W0UsCHoyzxdBp5UU9SeiuXDeOHLPV7~5ZaUzkl1EH5c87jfhIsK5vTzTehKWH3PRnWlPiAkn58RRApv~qinP-ISMRTdlVFVlysCuaTOaeHPDwGAakNXqIt1s0cSXMySMWzAscGuacHP0CjrhzGP-54w-VNldX3W0ySbaacqM8dyMOnxUKQL6Wl012k5DZ2kNjYg2u1Q2XKoD30hvNMLf1v~6VH5g__"
+            src="img/primadlucasnocell.jpg"
             alt="Imagem 1"
           />
           <Carousel.Caption style={carouselCaptionStyles}>
@@ -35,7 +35,7 @@ const Carrossels = () => {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://s3-alpha-sig.figma.com/img/f094/a092/a2dbd97e443e8ef10eed0470e02ab8fc?Expires=1742169600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=GdNx2QNHk2UbLl8RCbT2hPRnkIaJBCQqhEa3~Xk8IwUz9XeA2fA8Zlx4ZWsCSpk3d5rLbTJkXJ9TPW6CgHKDc~bkaJujCoRYNdlOyAZW4ypUA-A8G1fqLfqmyVwdpNdjs4mlgqc9n53SU9XLlegJ3~JmvhJHYcNb1A25MbI1Bi~YWYqBgXxrvlGUFfqDXAH6Il1EFnn4lOVG4vQu26YEK4D~~NhRARY1EK4P~-knHR-wDOa5vpvpNu3IqVfgD3zSgGkfS6vnzFfD9oluC-xARP2kDC8TZK0qjDxCVzPj8Cn3JAFA3oujg5a1Gw11Z3XsZG1EELrKXFxfEnJ~8ZZNrw__"
+            src="img/clientesconversando.jpg"
             alt="Imagem 2"
           />
           <Carousel.Caption style={carouselCaptionStyles}>
