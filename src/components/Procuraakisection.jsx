@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Row, Col } from "react-bootstrap";
 
 import { FaCommentAlt, FaMapMarkerAlt, FaBuilding } from "react-icons/fa"; // Atualizando os ícones

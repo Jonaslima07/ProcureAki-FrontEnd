@@ -1,18 +1,21 @@
-// Header.jsx
-import React from 'react';
-import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
-import { Search } from 'react-bootstrap-icons';
-
-
+import { Navbar, Container } from 'react-bootstrap';
+// import { Search } from 'react-bootstrap-icons';
 
 function Header() {
   return (
     <>
         <Navbar style={headerStyles.navbar} expand="lg">
         <Container style={headerStyles.container}>
-            <Navbar.Brand href="#" style={headerStyles.brand}>ProcureAki</Navbar.Brand>
+            <Navbar.Brand href="#" style={headerStyles.brand}>
+            ProcureAki
+            <img
+              src="https://s3-alpha-sig.figma.com/img/7b45/e801/23d69355f89fd96e98ec547f1403c355?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ZNrcIcaupXBVoPXJ91dD2FW0Phzv2VAp70R965dag39~f~v6OD0-6jSpM8wQmuk09y3c6De6IV7ZKuMvQD8J14HFJsv6jbRz7owHR2FeHDeJmvPZiNOKmCvlUSzXh4tSRQstKgyMkog7aga4mmKMWI-ESRIMYDNWqmgWUA2RaPypYfd2a~6GsDjnnHvfRW7dhu42qacyGmWRBMa2r~Q-1571ajlq15oa7y17s9mowzsI2btLCaccCV~okTXcBxcaLZT~vrNxqQ1xORLCET8UMh5fj337~9R~p9WcR72L3bXsqI26eFuA6mf8qMhxrVOLNvH8Gg6OeSsXtSqhEMRdSA__"
+              alt="Logo"
+              style={headerStyles.logo}
+            />
+            </Navbar.Brand>
             
-            <Form style={headerStyles.form}>
+            {/* <Form style={headerStyles.form}>
             <FormControl 
                 type="search" 
                 placeholder="Busque por uma loja" 
@@ -20,8 +23,8 @@ function Header() {
             />
             <Button style={headerStyles.button}>
                 <Search style={headerStyles.searchIcon} /> {/* Ícone de pesquisa */}
-            </Button>
-            </Form>
+            {/* </Button>
+            </Form> */} 
         </Container>
         </Navbar>
      <div style={headerStyles.divBelowHeader}></div>
@@ -36,30 +39,39 @@ const headerStyles = {
     backgroundColor: '#006D77',
     padding: '1rem 0',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+
   },
   container: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    
     width: '100%',
-    padding: '0', // Remover qualquer preenchimento extra do container
-    marginRight: '43rem',
+    padding: '0',
+    marginRight: '10rem',
+    
+    
   },
   brand: {
     color: 'white',
     fontSize: '24px',
     fontWeight: 'bold',
     marginRight: '1rem',
-    fontFamily: 'Ubuntu, sans-serif', // Aplicando a fonte Ubuntu
-       
+    fontFamily: 'Ubuntu, sans-serif', 
+    bottom:'30px',
+    top:'20px'
+  },
+  logo: {
+    width: '30px',
+    height: '30px',
+    marginRight: '10px',
+    borderRadius: '50%',
   },
   form: {
     flex: 1,
     maxWidth: '600px',
     display: 'flex',
     gap: '0px',
-    justifyContent: 'flex-start', // Garante que o campo de pesquisa e o botão fiquem alinhados à esquerda
+    justifyContent: 'flex-start',
     
     
   },
@@ -67,26 +79,26 @@ const headerStyles = {
     borderRadius: '5px',
     padding: '10px 20px',
     //border: '1px solid #ddd',
-    border: '5px solid #FFFFFF', /* Definindo a borda de 5px */                  
-    padding: '5px 10px',
-    width: '480px', // Ajustar o tamanho do campo de pesquisa
+    border: '5px solid #FFFFFF',               
+   
+    width: '480px', 
   },
   button: {
-    backgroundColor: '#001F2D', // Fundo preto
-    color: '#006D77', // Cor azul
+    backgroundColor: '#001F2D',
+    color: '#006D77', 
     border: 'none',
     borderRadius: '4px',
     padding: '10px 20px',
     
   },
   searchIcon: {
-    color: '#219EBC', // Cor do ícone azul
-    fontSize: '1.2rem', // Tamanho do ícone
+    color: '#219EBC', 
+    fontSize: '1.2rem', 
   },
    divBelowHeader: {
-    backgroundColor: '#001F2D', // Cor da div
-    width: '100%', // Largura da div (100% da largura do contêiner pai)
-    height: '5px', // Altura da div (ajustada para ser uma linha fina)
-    marginTop: '0', // Espaçamento acima da div
+    backgroundColor: '#001F2D', 
+    width: '100%', 
+    height: '5px', 
+    marginTop: '0', 
    }
 };
