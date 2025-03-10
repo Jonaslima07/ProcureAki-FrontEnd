@@ -62,13 +62,14 @@ function CadastrarLoja() {
 
   return (
     <>
-      <h2 style={{ marginTop: "50px", marginLeft: "550px", color: "#006D77" }}>
-        Cadastro de Loja
+      <h2 style={{ marginTop: "50px", marginLeft: "550px", color: "#02040F", alignContent:'center' }}>
+        Cadastre sua Loja
       </h2>
+      <p style={{color:'#02040F', marginLeft:'470px', marginTop:'20px', alignContent:'center'}}>Informe os seguintes dados abaixo para efetuar o cadastro</p>
       <Formik
         validationSchema={schema}
         onSubmit={(values) => {
-          console.log(values);
+          console.log(values)
         }}
         initialValues={{
           NomeLoja: "",
