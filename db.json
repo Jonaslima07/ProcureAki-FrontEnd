@@ -1,0 +1,14 @@
+{
+    "produtos": [
+      {
+        "id": 1,
+        "name": "Freio Shimano hidráulico",
+        "quantity": 23,
+        "price": 56.78,
+        "description": "Par de freios Shimano Altus MT200 Hidráulicos",
+        "image": "freioimg.png"
+      }
+      
+    ]
+  }
+  

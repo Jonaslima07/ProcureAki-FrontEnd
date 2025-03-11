@@ -23,7 +23,7 @@ export default Footer;
 
 const FooterStyles = {
   footer: {
-    backgroundColor: '#2A5C82',
+    backgroundColor: '#006D77',
     color: 'white',
     padding: '2rem 0',
     marginTop: '0', // Para garantir que não haja margem extra entre a linha e o footer
