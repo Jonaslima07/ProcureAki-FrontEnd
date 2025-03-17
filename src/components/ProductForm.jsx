@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+// 'http://localhost:5000/produtos',
 
 const ProductForm = ({ onClose, fetchProducts }) => {
   const [productData, setProductData] = useState({
@@ -21,7 +22,7 @@ const ProductForm = ({ onClose, fetchProducts }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Enviar dados para a fake API
+
     const response = await fetch('http://localhost:5000/produtos', {
       method: 'POST',
       headers: {
@@ -32,13 +33,12 @@ const ProductForm = ({ onClose, fetchProducts }) => {
 
     if (response.ok) {
       alert('Produto cadastrado com sucesso!');
-      fetchProducts(); // Atualiza os produtos exibidos
+      fetchProducts();
       onClose();
     } else {
       alert('Erro ao cadastrar o produto');
     }
   };
-
 
   return (
     <Modal show={true} onHide={onClose}>
@@ -47,34 +47,54 @@ const ProductForm = ({ onClose, fetchProducts }) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group controlId="productName">
-            <Form.Label style={{color: '#006D77'}} >Nome do Produto</Form.Label>
-            <Form.Control type="text" placeholder="Digite o nome do produto" />
+          <Form.Group controlId="name">
+            <Form.Label style={{color: '#006D77'}}>Nome do Produto</Form.Label>
+            <Form.Control 
+              type="text" 
+              placeholder="Digite o nome do produto" 
+              value={productData.name}
+              onChange={handleInputChange}
+            />
           </Form.Group>
 
-          <Form.Group controlId="productQuantity">
-            <Form.Label style={{color: '#006D77'}} >Quantidade</Form.Label>
+          <Form.Group controlId="quantity">
+            <Form.Label style={{color: '#006D77'}}>Quantidade</Form.Label>
             <Form.Control 
               type="number" 
               placeholder="Digite a quantidade" 
               min="0" 
-              step="1" 
+              value={productData.quantity}
+              onChange={handleInputChange}
             />
           </Form.Group>
 
-          <Form.Group controlId="productPrice">
+          <Form.Group controlId="price">
             <Form.Label style={{color: '#006D77'}}>Preço</Form.Label>
-            <Form.Control type="number" placeholder="Digite o preço" />
+            <Form.Control 
+              type="number" 
+              placeholder="Digite o preço" 
+              value={productData.price}
+              onChange={handleInputChange}
+            />
           </Form.Group>
 
-          <Form.Group controlId="productImage">
+          <Form.Group controlId="image">
             <Form.Label style={{color: '#006D77'}}>Imagem do Produto</Form.Label>
-            <Form.Control type="file" />
+            <Form.Control 
+              type="file"
+              onChange={(e) => setProductData({ ...productData, image: e.target.files[0] })}
+            />
           </Form.Group>
 
-          <Form.Group controlId="productDescription">
-            <Form.Label style={{color: '#006D77'}} >Descrição</Form.Label>
-            <Form.Control as="textarea" rows={3} placeholder="Descreva o produto" />
+          <Form.Group controlId="description">
+            <Form.Label style={{color: '#006D77'}}>Descrição</Form.Label>
+            <Form.Control 
+              as="textarea" 
+              rows={3} 
+              placeholder="Descreva o produto" 
+              value={productData.description}
+              onChange={handleInputChange}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -85,7 +105,7 @@ const ProductForm = ({ onClose, fetchProducts }) => {
         <Button 
           style={{ backgroundColor: '#006D77', color: 'white' }} 
           variant="primary" 
-          onClick={onClose}
+          onClick={handleSubmit}  
         >
           Cadastrar
         </Button>
