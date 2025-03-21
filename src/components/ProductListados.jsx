@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import ProductForm from '../components/ProductForm'; 
 import ProductCatolog from '../components/ProductCatolog'; 
@@ -162,7 +162,6 @@ const styles = {
     lineHeight: '100%',
     letterSpacing: '0',
     position: 'relative',
-    lineHeight: '1.2',
     top: '16px',
   },
 

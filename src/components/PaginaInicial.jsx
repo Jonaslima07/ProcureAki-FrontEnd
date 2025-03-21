@@ -1,13 +1,13 @@
 import  { useState, useEffect } from 'react';
 import { Carousel, Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import '../components/carrossel.css';
-import Procuraakisection from '../components/Procuraakisection';
+// import Procuraakisection from './Procuraakisection';
 import '../components/cards.css';
 
-const Carrossels = () => {
+const PaginaInicial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSelect = (selectedIndex) => {
     setCurrentIndex(selectedIndex);
@@ -20,8 +20,8 @@ const Carrossels = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const goToCadastrarLoja = () => navigate('/Login');
-  const goToLogin = () => navigate('/CadastrarLoja');
+  // const goToCadastrarLoja = () => navigate('/Login');
+  // const goToLogin = () => navigate('/CadastrarLoja');
 
   return (
     <Container id="home" className="mt-4">
@@ -48,7 +48,7 @@ const Carrossels = () => {
         </Carousel.Item>
       </Carousel>
 
-      <Procuraakisection />
+      {/* <Procuraakisection />
 
       <div className="container mt-5">
         <div className="row justify-content-center">
@@ -75,12 +75,12 @@ const Carrossels = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </Container>
   );
 };
 
-export default Carrossels;
+export default PaginaInicial;
 
 const carouselCaptionStyles = {
   backgroundColor: '#B6CCFE80',

@@ -1,7 +1,7 @@
 
 import { Row, Col } from "react-bootstrap";
 
-import { FaCommentAlt, FaMapMarkerAlt, FaBuilding } from "react-icons/fa"; // Atualizando os ícones
+import { FaCommentAlt, FaMapMarkerAlt, FaBuilding } from "react-icons/fa"; 
 
 const ProcuraAkiSection = () => {
   return (

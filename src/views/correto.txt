@@ -1,0 +1,235 @@
+import { useEffect, useState } from "react";
+import { Button, Form, Modal, Table } from "react-bootstrap";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Esquema de validação com Yup
+const schema = Yup.object({
+  nomeLoja: Yup.string().required("Nome da loja é obrigatório"),
+  descricao: Yup.string().required("Descrição é obrigatória"),
+  cnpj: Yup.string()
+    .matches(/^\d{14}$/, "CNPJ deve ter 14 dígitos")
+    .required("CNPJ é obrigatório"),
+  horarioAbertura: Yup.string().required("Horário de abertura é obrigatório"),
+  horarioFechamento: Yup.string().required("Horário de fechamento é obrigatório"),
+  cep: Yup.string()
+    .matches(/^\d{8}$/, "CEP deve ter 8 dígitos")
+    .required("CEP é obrigatório"),
+  nomeRua: Yup.string().required("Nome da rua é obrigatório"),
+  cidade: Yup.string().required("Cidade é obrigatória"),
+  estado: Yup.string().required("Estado é obrigatório"),
+  numero: Yup.string().required("Número é obrigatório"),
+  telefone: Yup.string()
+    .matches(/^\d{10,11}$/, "Telefone inválido")
+    .required("Telefone é obrigatório"),
+  email: Yup.string().email("E-mail inválido").required("E-mail é obrigatório"),
+  senha: Yup.string()
+    .min(6, "A senha deve ter pelo menos 6 caracteres")
+    .required("Senha é obrigatória"),
+  confirmarSenha: Yup.string()
+    .oneOf([Yup.ref("senha"), null], "As senhas devem coincidir")
+    .required("Confirmação de senha é obrigatória"),
+  categoria: Yup.string().required("Categoria é obrigatória"),
+  bairro: Yup.string().required('Bairro é obrigatório')
+});
+
+const CadastroLoja = () => {
+  const [lojas, setLojas] = useState([]);
+  const [show, setShow] = useState(false);
+  const [editId, setEditId] = useState(null);
+
+  const handleShow = () => {
+    setShow(!show);
+    setEditId(null);
+    formik.resetForm();
+  };
+
+  // Buscar lojas do backend
+  useEffect(() => {
+    fetch("https://procureaki.onrender.com/lojas")
+      .then((res) => res.json())
+      .then((data) => {
+        setLojas(data);
+      })
+      .catch(() => toast.error("Erro ao carregar lojas."));
+  }, []);
+
+  const handleSubmit = async (values) => {
+    const endereco = {
+      cep: values.cep,
+      logradouro: values.nomeRua,
+      cidade: values.cidade,
+      estado: values.estado,
+      numero: values.numero,
+      bairro: values.bairro
+    };
+
+    const categoria = {
+      nome_categoria: values.categoria,
+    };
+
+    const dadosParaEnviar = {
+      nome: values.nomeLoja,
+      descricao: values.descricao,
+      cnpj: values.cnpj,
+      horario_funcionamento: `${values.horarioAbertura} - ${values.horarioFechamento}`,
+      telefone: values.telefone,
+      email: values.email,
+      senha: values.senha,
+      endereco: endereco,
+      categoria: categoria,
+    };
+
+    const method = editId ? "PUT" : "POST";
+    const url = editId
+      ? `https://procureaki.onrender.com/lojas/${editId}`
+      : "https://procureaki.onrender.com/lojas/";
+
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosParaEnviar),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error("Erro na API:", errorData);
+        toast.error("Erro ao salvar loja. Verifique os dados.");
+        return;
+      }
+
+      const data = await response.json();
+
+      // Atualize a lista de lojas diretamente
+      if (editId) {
+        // Caso esteja editando uma loja, substitua a loja atualizada
+        setLojas((prev) => prev.map((loja) => (loja.id === editId ? data : loja)));
+      } else {
+        // Caso esteja criando uma nova loja, adicione à lista
+        setLojas((prev) => [...prev, data]);
+      }
+
+      setShow(false);
+      toast.success(editId ? "Loja atualizada com sucesso!" : "Loja cadastrada com sucesso!");
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      toast.error("Erro ao conectar com o servidor.");
+    }
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      nomeLoja: "", descricao: "", cnpj: "", horarioAbertura: "", horarioFechamento: "",
+      cep: "", nomeRua: "", cidade: "", estado: "", numero: "", telefone: "", email: "",
+      senha: "", confirmarSenha: "", categoria: "", bairro:""
+    },
+    validationSchema: schema,
+    onSubmit: handleSubmit,
+  });
+
+  return (
+    <>
+      <Button className="m-2" variant="primary" onClick={handleShow}>+</Button>
+      <Modal show={show} onHide={handleShow}>
+        <Modal.Header closeButton>
+          <Modal.Title>{editId ? "Editar Loja" : "Cadastrar Loja"}</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={formik.handleSubmit}>
+          <Modal.Body>
+            {Object.keys(formik.initialValues).map((field) => (
+              <Form.Group className="mb-3" controlId={field} key={field}>
+                <Form.Label>{field}</Form.Label>
+                <Form.Control
+                  type={
+                    field.includes("senha") ? "password" :
+                    field === "email" ? "email" :
+                    ["telefone", "cnpj", "cep"].includes(field) ? "tel" :
+                    ["horarioAbertura", "horarioFechamento"].includes(field) ? "time" : "text"
+                  }
+                  name={field}
+                  onChange={formik.handleChange}
+                  value={formik.values[field]}
+                  placeholder={`Digite ${field}`}
+                />
+                {formik.errors[field] && <div className="text-danger">{formik.errors[field]}</div>}
+              </Form.Group>
+            ))}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleShow}>Fechar</Button>
+            <Button variant="primary" type="submit">{editId ? "Atualizar" : "Salvar"}</Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+
+      {/* Tabela para listar as lojas */}
+      <Table striped bordered hover className="mt-3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>CNPJ</th>
+            <th>Horário</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lojas.length > 0 ? (
+            lojas.map((loja, index) => (
+              <tr key={loja.id}>
+                <td>{index + 1}</td>
+                <td>{loja.nome}</td>
+                <td>{loja.descricao}</td>
+                <td>{loja.cnpj}</td>
+                <td>{loja.horario_funcionamento}</td>
+                <td>{loja.telefone}</td>
+                <td>{loja.email}</td>
+                <td>
+                  <Button
+                    variant="warning"
+                    size="sm"
+                    onClick={() => {
+                      setEditId(loja.id);
+                      formik.setValues({
+                        nomeLoja: loja.nome,
+                        descricao: loja.descricao,
+                        cnpj: loja.cnpj,
+                        horarioAbertura: loja.horario_funcionamento.split(" - ")[0],
+                        horarioFechamento: loja.horario_funcionamento.split(" - ")[1],
+                        cep: loja.endereco.cep,
+                        nomeRua: loja.endereco.logradouro,
+                        cidade: loja.endereco.cidade,
+                        estado: loja.endereco.estado,
+                        numero: loja.endereco.numero,
+                        telefone: loja.telefone,
+                        email: loja.email,
+                        senha: "",
+                        confirmarSenha: "",
+                        categoria: loja.categoria.nome_categoria,
+                        bairro: loja.endereco.bairro
+                      });
+                      setShow(true);
+                    }}
+                  >
+                    Editar
+                  </Button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr><td colSpan="8" className="text-center">Nenhuma loja cadastrada.</td></tr>
+          )}
+        </tbody>
+      </Table>
+      <ToastContainer />
+    </>
+  );
+};
+
+export default CadastroLoja;

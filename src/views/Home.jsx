@@ -1,9 +1,8 @@
-
-import Carrossels from '../components/Carrossels.jsx'; 
+import PaginaInicial from '../components/PaginaInicial.jsx';
 const Home = () => {
   return (
     <>
-      <Carrossels />
+      <PaginaInicial />
       
     </>
   );

@@ -1,6 +1,6 @@
 //codigo sozinho
 
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
@@ -156,7 +156,7 @@ const styles = {
     top: '-18px',   // Posição para mover o texto para baixo
     //transform: 'translateY(-10px)',  // Ajusta ainda mais a posição do texto para cima
     fontWeight: 600,  // Peso da fonte
-    fontSize: '26px', // Tamanho da fonte
+   
     lineHeight: '100%', // Altura da linha
     letterSpacing: '0%', // Espaçamento entre as letras
     left: '500px',   // Posição horizontal
@@ -178,7 +178,6 @@ const styles = {
     lineHeight: '100%',  // Ajuste de altura de linha para melhorar a leitura
     letterSpacing: '0',
     position: 'relative', // Ajusta a posição do texto
-     lineHeight: '1.2',
     top: '16px',  // Move o texto para baixo
     
   },

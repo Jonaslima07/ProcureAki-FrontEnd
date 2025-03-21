@@ -1,4 +1,3 @@
-
 function Footer() {
   return (
     <>
@@ -23,17 +22,16 @@ export default Footer;
 
 const FooterStyles = {
   footer: {
-    backgroundColor: '#006D77',
+    backgroundColor: '#2A5C82',
     color: 'white',
     padding: '2rem 0',
-    marginTop: '0', // Para garantir que não haja margem extra entre a linha e o footer
     textAlign: 'center',
+    width: '100%',
   },
   divBelowFooter: {
     backgroundColor: '#001F2D', // Cor da linha
     width: '100%', // Largura da div (100% da largura do contêiner pai)
     height: '5px', // Altura da div (ajustada para ser uma linha fina)
-    marginBottom: '0', // Para garantir que não tenha margem abaixo da linha
   },
   content: {
     maxWidth: '1200px',
