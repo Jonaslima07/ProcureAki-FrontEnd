@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-// Esquema de validação com Yup
 const schema = Yup.object({
   nomeLoja: Yup.string().required("Nome da loja é obrigatório"),
   descricao: Yup.string().required("Descrição é obrigatória"),
@@ -39,6 +39,11 @@ const CadastroLoja = () => {
   const [lojas, setLojas] = useState([]);
   const [show, setShow] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+
+  const toggleMostrarSenha = () => {
+    setMostrarSenha(!mostrarSenha);
+  };
 
   const handleShow = () => {
     setShow(!show);
@@ -46,12 +51,11 @@ const CadastroLoja = () => {
     formik.resetForm();
   };
 
-  // Buscar lojas do backend
   const fetchLojas = async () => {
     try {
       const res = await fetch("https://procureaki.onrender.com/lojas");
       const data = await res.json();
-      console.log(data); // Verifique a estrutura dos dados aqui
+      console.log(data); 
       setLojas(data);
     } catch (error) {
       console.error("Erro ao carregar lojas", error);
@@ -108,7 +112,6 @@ const CadastroLoja = () => {
         return;
       }
 
-      // Atualiza a lista de lojas após salvar
       await fetchLojas();
 
       setShow(false);
@@ -116,6 +119,28 @@ const CadastroLoja = () => {
     } catch (error) {
       console.error("Erro na requisição:", error);
       toast.error("Erro ao conectar com o servidor.");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    console.log("Tentando excluir loja com ID:", id); 
+  
+    try {
+      const response = await fetch(`https://procureaki.onrender.com/lojas/${id}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Erro na resposta da API:", errorText);
+        throw new Error("Erro ao excluir a loja.");
+      }
+  
+      toast.success("Loja excluída com sucesso!");
+      await fetchLojas();
+    } catch (error) {
+      console.error("Erro ao excluir loja:", error);
+      toast.error("Erro ao excluir loja.");
     }
   };
 
@@ -131,7 +156,7 @@ const CadastroLoja = () => {
 
   return (
     <>
-      <Button className="m-2" variant="primary" onClick={handleShow}>+</Button>
+      <Button className="m-2" variant="primary" onClick={handleShow} style={styles.btnadd}>Adicionar Loja</Button>
       <Modal show={show} onHide={handleShow}>
         <Modal.Header closeButton>
           <Modal.Title>{editId ? "Editar Loja" : "Cadastrar Loja"}</Modal.Title>
@@ -141,18 +166,36 @@ const CadastroLoja = () => {
             {Object.keys(formik.initialValues).map((field) => (
               <Form.Group className="mb-3" controlId={field} key={field}>
                 <Form.Label>{field}</Form.Label>
-                <Form.Control
-                  type={
-                    field.includes("senha") ? "password" :
-                    field === "email" ? "email" :
-                    ["telefone", "cnpj", "cep"].includes(field) ? "tel" :
-                    ["horarioAbertura", "horarioFechamento"].includes(field) ? "time" : "text"
-                  }
-                  name={field}
-                  onChange={formik.handleChange}
-                  value={formik.values[field]}
-                  placeholder={`Digite ${field}`}
-                />
+                {field === "senha" || field === "confirmarSenha" ? (
+                  <div className="d-flex align-items-center">
+                    <Form.Control
+                      type={mostrarSenha ? "text" : "password"}
+                      name={field}
+                      onChange={formik.handleChange}
+                      value={formik.values[field]}
+                      placeholder={`Digite ${field}`}
+                    />
+                    <Button
+                      variant="outline-secondary"
+                      onClick={toggleMostrarSenha}
+                      style={styles.mostrarBtn}
+                    >
+                      {mostrarSenha ? <FaEyeSlash /> : <FaEye />} {/* Ícones de olho */}
+                    </Button>
+                  </div>
+                ) : (
+                  <Form.Control
+                    type={
+                      field === "email" ? "email" :
+                      ["telefone", "cnpj", "cep"].includes(field) ? "tel" :
+                      ["horarioAbertura", "horarioFechamento"].includes(field) ? "time" : "text"
+                    }
+                    name={field}
+                    onChange={formik.handleChange}
+                    value={formik.values[field]}
+                    placeholder={`Digite ${field}`}
+                  />
+                )}
                 {formik.errors[field] && <div className="text-danger">{formik.errors[field]}</div>}
               </Form.Group>
             ))}
@@ -164,8 +207,7 @@ const CadastroLoja = () => {
         </Form>
       </Modal>
 
-      {/* Tabela para listar as lojas */}
-      <Table striped bordered hover className="mt-3">
+      <Table striped bordered hover className="mt-3" style={styles.table}>
         <thead>
           <tr>
             <th>#</th>
@@ -173,8 +215,15 @@ const CadastroLoja = () => {
             <th>Descrição</th>
             <th>CNPJ</th>
             <th>Horário</th>
+            <th>Cep</th>
+            <th>Nome da rua</th>
+            <th>Cidade</th>
+            <th>Bairro</th>
+            <th>Estado</th>
+            <th>Número</th>
             <th>Telefone</th>
             <th>E-mail</th>
+            <th>Categoria</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -187,10 +236,18 @@ const CadastroLoja = () => {
                 <td>{loja.descricao}</td>
                 <td>{loja.cnpj}</td>
                 <td>{loja.horario_funcionamento}</td>
+                <td>{loja.endereco.cep}</td>
+                <td>{loja.endereco.logradouro}</td>
+                <td>{loja.endereco.cidade}</td>
+                <td>{loja.endereco.bairro}</td>
+                <td>{loja.endereco.estado}</td>
+                <td>{loja.endereco.numero}</td>
                 <td>{loja.telefone}</td>
                 <td>{loja.email}</td>
+                <td>{loja.categoria.nome_categoria}</td>
                 <td>
                   <Button
+                    style={styles.btnEdit}
                     variant="warning"
                     size="sm"
                     onClick={() => {
@@ -208,7 +265,7 @@ const CadastroLoja = () => {
                         numero: loja.endereco.numero,
                         telefone: loja.telefone,
                         email: loja.email,
-                        senha: "",
+                        senha: loja.senha,
                         confirmarSenha: "",
                         categoria: loja.categoria.nome_categoria,
                         bairro: loja.endereco.bairro
@@ -217,6 +274,14 @@ const CadastroLoja = () => {
                     }}
                   >
                     Editar
+                  </Button>
+                  <Button
+                    style={styles.btnDelete}
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDelete(loja.id)}
+                  >
+                    Excluir
                   </Button>
                 </td>
               </tr>
@@ -232,3 +297,40 @@ const CadastroLoja = () => {
 };
 
 export default CadastroLoja;
+
+const styles = {
+  btnadd: {
+    left: '30rem',
+    position: 'relative',
+    top: '25px',
+    borderRadius: '4px',
+    fontSize: '15px',
+    backgroundColor: '#006D77',
+    border: 'none'
+  },
+  table: {
+    top: '50px',
+    position: 'relative',
+    right:'55px'
+  },
+  btnDelete: {
+    backgroundColor: 'red',
+    color: 'white',
+    marginLeft: '4.3rem', 
+    border: 'none',
+    bottom:'1.8rem',
+    position:'relative'
+  },
+  btnEdit: {
+    backgroundColor: 'blue',
+    border: 'none',
+    color: 'white',
+    marginTop:'1rem'
+  },
+  mostrarBtn: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: '#006D77',
+    marginLeft: '10px'
+  }
+};

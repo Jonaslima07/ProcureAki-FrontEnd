@@ -36,7 +36,7 @@ const headerStyle = {
     color: 'white',  
     position: 'center',  
     whiteSpace: 'nowrap',  
-    marginRight: '13rem', 
+    marginRight: '10rem', 
     
   };
   
@@ -50,7 +50,7 @@ const headerStyle = {
     width: '118px',
     height: '49px',
     Top: '882px',
-    Left: '-10px',
+    Left: '-15px',
     fontWeight: 500,
     letterSpacing: '0',  
     position: 'relative',
@@ -64,7 +64,7 @@ const headerStyle = {
     lineHeight: '50px', 
     position: 'relative',
     top: '-4px',
-    left: '-7px'
+    left: '1px'
   };
 
   const CasaIcon = {
