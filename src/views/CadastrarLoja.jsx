@@ -32,7 +32,10 @@ const schema = Yup.object({
     .oneOf([Yup.ref("senha"), null], "As senhas devem coincidir")
     .required("Confirmação de senha é obrigatória"),
   categoria: Yup.string().required("Categoria é obrigatória"),
-  bairro: Yup.string().required('Bairro é obrigatório')
+  bairro: Yup.string().required('Bairro é obrigatório'),
+  latitude:Yup.string().required('latitude é obrigatório'),
+  longitude:Yup.string().required('latitude é obrigatório')
+
 });
 
 const CadastroLoja = () => {
@@ -55,7 +58,7 @@ const CadastroLoja = () => {
     try {
       const res = await fetch("https://procureaki.onrender.com/lojas");
       const data = await res.json();
-      console.log(data); 
+      // console.log(data); 
       setLojas(data);
     } catch (error) {
       console.error("Erro ao carregar lojas", error);
@@ -74,12 +77,18 @@ const CadastroLoja = () => {
       cidade: values.cidade,
       estado: values.estado,
       numero: values.numero,
-      bairro: values.bairro
+      bairro: values.bairro,
     };
 
     const categoria = {
       nome_categoria: values.categoria,
+
     };
+
+    const localizacao = {
+      latitude: values.latitude,
+      longitude: values.longitude
+    }
 
     const dadosParaEnviar = {
       nome: values.nomeLoja,
@@ -91,7 +100,10 @@ const CadastroLoja = () => {
       senha: values.senha,
       endereco: endereco,
       categoria: categoria,
+      localizacao: localizacao
+     
     };
+
 
     const method = editId ? "PUT" : "POST";
     const url = editId
@@ -148,7 +160,7 @@ const CadastroLoja = () => {
     initialValues: {
       nomeLoja: "", descricao: "", cnpj: "", horarioAbertura: "", horarioFechamento: "",
       cep: "", nomeRua: "", cidade: "", estado: "", numero: "", telefone: "", email: "",
-      senha: "", confirmarSenha: "", categoria: "", bairro:""
+      senha: "", confirmarSenha: "", categoria: "", bairro:"", latitude:"", longitude:""
     },
     validationSchema: schema,
     onSubmit: handleSubmit,
@@ -268,7 +280,9 @@ const CadastroLoja = () => {
                         senha: loja.senha,
                         confirmarSenha: "",
                         categoria: loja.categoria.nome_categoria,
-                        bairro: loja.endereco.bairro
+                        bairro: loja.endereco.bairro,
+                        latitude:loja.latitude,
+                        longitude:loja.longitude
                       });
                       setShow(true);
                     }}
