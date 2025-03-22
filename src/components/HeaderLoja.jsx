@@ -29,7 +29,7 @@ export default HeaderLoja;
 
 const headerStyle = {
   backgroundColor: "#006D77",
-  padding: "20px 40px",
+  padding: "15px",
 };
 
 const greetingStyle = {
@@ -37,20 +37,20 @@ const greetingStyle = {
   fontSize: "30px",
   color: "white",
   whiteSpace: "nowrap",
-  marginRight: "13rem",
+  marginRight: "14rem",
   display: "flex",
   alignItems: "center",
-  gap: "10px", // Espaço entre texto e ícone
+  gap: "1px", 
 };
 
 const textoProcureAk = {
-  fontSize: "29px",
+  fontSize: "25px",
   color: "white",
   fontWeight: 500,
   position: "relative",
   display: "flex",
   alignItems: "center",
-  gap: "7px", // Espaço entre texto e ícone
+  gap: "1px", 
 };
 
 const Locationwhite = {
@@ -58,7 +58,4 @@ const Locationwhite = {
   height: "33px",
 };
 
-// const CasaIcon = {
-//   width: "47px",
-//   height: "45px",
-// };
+

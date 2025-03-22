@@ -56,7 +56,7 @@ const headerStyles = {
     color: 'white',
     fontSize: '24px',
     fontWeight: 'bold',
-    marginRight: '0.5rem', 
+    marginRight: '10px', 
     fontFamily: 'Ubuntu, sans-serif',
     marginLeft: '12px', 
   },
@@ -64,7 +64,7 @@ const headerStyles = {
     width: '30px',
     height: '30px',
     borderRadius: '50%',
-    marginRight: '70px', 
+    marginRight: '10px', 
   },
   form: {
     flex: 1,
@@ -101,17 +101,15 @@ const headerStyles = {
     flexDirection: 'row',
     justifyContent: 'center',
     width: 'auto',
-    marginLeft: 'auto',
+    marginLeft: '10rem',
     position: 'relative',
-    top: '-5px',
-    left: '-41px',
+    top: '-2px',
   },
   
   navLink: {
-    color: '#fff', // Cor do texto
-    fontSize: '16px', // Tamanho da fonte
-    marginLeft:'180px'
-    
-    
-  },
+    color: '#fff', 
+    fontSize: '16px', 
+    margin: '8px',
+    gap:'5px'
+  }
 };
