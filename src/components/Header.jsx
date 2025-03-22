@@ -1,7 +1,41 @@
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import { useState, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Header() {
+  const [categorias, setCategorias] = useState([]);
+
+  const fetchCategorias = async () => {
+    try {
+      const res = await fetch("https://procureaki.onrender.com/categorias");
+      const data = await res.json();
+      console.log(data);
+
+      // Agrupar categorias por nome e exibir apenas uma vez por nome
+      const categoriasUnicas = [];
+      const seenCategorias = new Set();
+
+      data.forEach((categoria) => {
+        if (!seenCategorias.has(categoria.nome_categoria)) {
+          seenCategorias.add(categoria.nome_categoria);
+          categoriasUnicas.push(categoria);
+        }
+      });
+
+      setCategorias(categoriasUnicas);
+    } catch (error) {
+      console.error("Erro ao carregar categorias", error);
+      toast.error("Erro ao carregar categorias.");
+    }
+  };
+
+  useEffect(() => {
+    fetchCategorias();
+  }, []);
+
   return (
     <>
       <Navbar style={headerStyles.navbar} expand="lg">
@@ -14,6 +48,24 @@ function Header() {
             alt="Logo"
             style={headerStyles.logo}
           />
+
+          <Dropdown>
+            <Dropdown.Toggle style={headerStyles.btnDrop} variant="success" id="dropdown-basic">
+              Selecione uma categoria para buscar por uma loja
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {categorias.length > 0 ? (
+                categorias.map((categoria) => (
+                  <Dropdown.Item style={headerStyles.item} key={categoria.id} href={`#categoria-${categoria.nome_categoria}`}>
+                    {categoria.nome_categoria}
+                  </Dropdown.Item>
+                ))
+              ) : (
+                <Dropdown.Item disabled>Carregando...</Dropdown.Item>
+              )}
+            </Dropdown.Menu>
+          </Dropdown>
 
           <Nav className="justify-content-center" style={headerStyles.nav}>
             <Nav.Link as={Link} to="/cadastrarloja" style={headerStyles.navLink}>
@@ -31,6 +83,7 @@ function Header() {
           </Nav>
         </Container>
       </Navbar>
+      <ToastContainer />
       <div style={headerStyles.divBelowHeader}></div>
     </>
   );
@@ -40,76 +93,76 @@ export default Header;
 
 const headerStyles = {
   navbar: {
-    backgroundColor: '#006D77',
-    padding: '1rem 0',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    backgroundColor: "#006D77",
+    padding: "1rem 0",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
   },
   container: {
-    display: 'flex',
-    justifyContent: 'flex-start', 
-    alignItems: 'center', 
-    width: '100%',
-    padding: '0',
-    marginRight: '2rem', 
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "100%",
+    padding: "0",
+    marginRight: "2rem",
   },
   brand: {
-    color: 'white',
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginRight: '10px', 
-    fontFamily: 'Ubuntu, sans-serif',
-    marginLeft: '12px', 
+    fontSize: '29px',  
+    color: 'white',  
+    margin: 0,  
+    lineHeight: '50px',  
+    textAlign: 'left',  
+    Top: '52px',
+    Left: '15px',
+    fontWeight: 500,
+    position: 'relative',
+    
   },
   logo: {
-    width: '30px',
-    height: '30px',
-    borderRadius: '50%',
-    marginRight: '10px', 
-  },
-  form: {
-    flex: 1,
-    maxWidth: '600px',
-    display: 'flex',
-    gap: '0px',
-    justifyContent: 'flex-start',
-  },
-  formControl: {
-    borderRadius: '5px',
-    padding: '10px 20px',
-    border: '5px solid #FFFFFF',
-    width: '480px',
-  },
-  button: {
-    backgroundColor: '#001F2D',
-    color: '#006D77',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px 20px',
-  },
-  searchIcon: {
-    color: '#219EBC',
-    fontSize: '1.2rem',
+    width: "33px",
+    height: "33px",
+    position: "relative",
+    right: "2px",
+    bottom: "2px",
   },
   divBelowHeader: {
-    backgroundColor: '#001F2D',
-    width: '100%',
-    height: '5px',
-    marginTop: '0',
+    backgroundColor: "#001F2D",
+    width: "100%",
+    height: "5px",
+    marginTop: "0",
   },
   nav: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: 'auto',
-    marginLeft: '10rem',
-    position: 'relative',
-    top: '-2px',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "auto",
+    marginLeft: "10rem",
+    position: "relative",
+    top: "-2px",
   },
-  
   navLink: {
-    color: '#fff', 
-    fontSize: '16px', 
-    margin: '8px',
-    gap:'5px'
+    color: "#fff",
+    fontSize: "16px",
+    margin: "8px",
+    gap: "5px",
+  },
+  btnDrop: {
+    backgroundColor: "white",
+    color: "black",
+    fontSize: "15px",
+    border: "none",
+    boxShadow: "none",
+    padding: "8px 12px",
+    cursor: "pointer",
+    textTransform: "none",
+  },
+  item: {
+    backgroundColor: "white", // Fundo preto
+    color: "black", // Texto branco
+    padding: "10px 15px", // Espaçamento interno
+    borderRadius: "5px", // Bordas arredondadas
+    transition: "background-color 0.3s ease", // Transição suave
+  },
+  itemHover: {
+    backgroundColor: "#444", // Cor ao passar o mouse
   }
 };
