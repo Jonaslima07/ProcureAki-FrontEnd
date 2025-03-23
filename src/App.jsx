@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './templates/Layout.jsx';
 import Home from './views/Home.jsx';
 import CadastrarProduto from './views/CadastrarProduto'; 
-import CadastrarLoja from './views/CadastrarLoja.jsx';  // Importe o componente
+import CadastrarLoja from './views/CadastrarLoja.jsx';  
 import CadastroCliente from './views/CadastroCliente.jsx';
 import Login from './views/Login.jsx';
 import NoPage from './views/NoPage.jsx';

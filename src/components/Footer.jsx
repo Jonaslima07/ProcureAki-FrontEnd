@@ -22,7 +22,7 @@ export default Footer;
 
 const FooterStyles = {
   footer: {
-    backgroundColor: '#2A5C82',
+    backgroundColor: '#006D77',
     color: 'white',
     padding: '2rem 0',
     textAlign: 'center',
