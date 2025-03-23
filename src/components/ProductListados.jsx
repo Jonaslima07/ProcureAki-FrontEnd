@@ -14,7 +14,7 @@ const ProductListados = () => {
   
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/produtos');
+      const response = await fetch('https://procureaki.onrender.com/produtos');
       const data = await response.json();
       setProducts(data.produtos || data); 
     } catch (error) {
@@ -30,7 +30,7 @@ const ProductListados = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:5000/produtos/${productId}`, {
+      const response = await fetch(`https://procureaki.onrender.com/produtos/${productId}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -85,15 +85,15 @@ const ProductListados = () => {
               <Col key={index} md={4}>
                 <div style={styles.productItem}>
                   <img
-                    src={product.image ? `/img/${product.image}` : '/img/default-image.png'}
+                    src={product.imagem_url ? `/img/${product.imagem_url}` : '/img/default-image.png'}
                     alt={product.name}
                     style={styles.productImage}
                   />
                   <div>
                     <h5>{product.name}</h5>
-                    <p>Preço: R$ {product.price}</p>
-                    <p>Quantidade: {product.quantity}</p>
-                    <p>{product.description}</p>
+                    <p>Preço: R$ {product.preco}</p>
+                    <p>Quantidade: {product.quantidade}</p>
+                    <p>{product.descricao}</p>
                     <Button
                       variant="warning"
                       style={styles.editButton}
