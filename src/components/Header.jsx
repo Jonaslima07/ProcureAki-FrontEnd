@@ -49,7 +49,7 @@ function Header() {
             style={headerStyles.logo}
           />
 
-          <Dropdown>
+          <Dropdown style={headerStyles.drop}>
             <Dropdown.Toggle style={headerStyles.btnDrop} variant="success" id="dropdown-basic">
               Selecione uma categoria para buscar por uma loja
             </Dropdown.Toggle>
@@ -167,5 +167,8 @@ const headerStyles = {
   },
   itemHover: {
     backgroundColor: "#444", // Cor ao passar o mouse
+  },
+  drop:{
+    marginLeft:"1rem"
   }
 };
