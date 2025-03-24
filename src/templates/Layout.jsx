@@ -15,6 +15,9 @@ const Layout = () => {
   const isCadastrarProdutosPage = location.pathname === '/cadastroproduto';
   const isCadastroClientePage = location.pathname === '/cadastrocliente';
   const isCadastroLojaPage = location.pathname === '/cadastrarloja';
+  const isLojascadastradasPage = location.pathname === '/lojacategoria';
+  const isLoginPage = location.pathname === '/login';
+  
 
 
   return (
@@ -23,6 +26,7 @@ const Layout = () => {
       {isCadastrarProdutosPage && <HeaderProdutos />}  {/* Renderizando o HeaderProdutos na rota específica */}
       {isCadastroClientePage && <HeaderProdutos />}  {/* Renderizando o HeaderProdutos na rota específica */}
       {isCadastroLojaPage && <HeaderLoja />}
+      {isLoginPage && <HeaderLoja />}
       
       <Container>
         <main>
@@ -31,7 +35,8 @@ const Layout = () => {
       </Container>
 
       {isHomePage && <Footer />}
-      {isCadastrarProdutosPage && <FooterLimpo />} 
+      {isCadastrarProdutosPage && <FooterLimpo />}
+       
     </>
   );
 };

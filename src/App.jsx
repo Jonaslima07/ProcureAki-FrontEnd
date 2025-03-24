@@ -6,6 +6,7 @@ import CadastrarLoja from './views/CadastrarLoja.jsx';
 import CadastroCliente from './views/CadastroCliente.jsx';
 import Login from './views/Login.jsx';
 import NoPage from './views/NoPage.jsx';
+import Lojascadastradas from './views/Lojascadastradas.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -33,6 +34,11 @@ function App() {
         {
           path: 'login',
           element: <Login />,
+        },
+
+        {
+          path: 'lojacategoria',  // Nova rota
+          element: <Lojascadastradas />,
         },
       ],
     },

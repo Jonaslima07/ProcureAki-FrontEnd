@@ -75,9 +75,12 @@ function Header() {
               Cadastro de Cliente
             </Nav.Link>
             <Nav.Link as={Link} to="/cadastroproduto" style={headerStyles.navLink}>
-              Cadastrar Produtos
+              Cadastrar produtos
             </Nav.Link>
-            <Nav.Link as={Link} to="/" style={headerStyles.navLink}>
+            <Nav.Link as={Link} to="/lojacategoria" style={headerStyles.navLink}>
+              categoria Loja
+            </Nav.Link>
+            <Nav.Link as={Link} to="/login" style={headerStyles.navLink}>
               Login
             </Nav.Link>
           </Nav>
