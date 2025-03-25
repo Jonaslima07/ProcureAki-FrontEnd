@@ -223,5 +223,6 @@ const styles = {
 
   editButton: {
     marginRight:'10px',
+    backgroundColor: '#006D77', 
 },
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -14,7 +14,28 @@ const schema = Yup.object({
   loja_id: Yup.number().required("Loja_id é obrigatória"),
 });
 
-const CadastroProduto = ({ show, onClose, onProductAdded }) => {
+const CadastroProduto = ({ show, onClose, onProductAdded, productToEdit }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (productToEdit) {
+      setIsEditing(true);
+      // Preenche os valores do formulário com os dados do produto a ser editado
+      formik.setValues({
+        nome: productToEdit.nome,
+        descricao: productToEdit.descricao,
+        preco: productToEdit.preco,
+        quantidade: productToEdit.quantidade,
+        imagem_url: productToEdit.imagem_url,
+        loja_id: productToEdit.loja_id,
+      });
+    } else {
+      setIsEditing(false);
+      // Reseta os valores do formulário para cadastro novo
+      formik.resetForm();
+    }
+  }, [productToEdit]);
+
   const handleSubmit = async (values) => {
     const dadosParaEnviar = {
       nome: values.nome,
@@ -26,8 +47,14 @@ const CadastroProduto = ({ show, onClose, onProductAdded }) => {
     };
 
     try {
-      const response = await fetch('https://procureaki.onrender.com/produtos', {
-        method: 'POST',
+      const url = isEditing 
+        ? `https://procureaki.onrender.com/produtos/${productToEdit.id}`
+        : 'https://procureaki.onrender.com/produtos';
+      
+      const method = isEditing ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -39,7 +66,7 @@ const CadastroProduto = ({ show, onClose, onProductAdded }) => {
         throw new Error(error.error || 'Erro ao salvar o produto');
       }
 
-      toast.success("Produto salvo com sucesso!");
+      toast.success(`Produto ${isEditing ? 'atualizado' : 'cadastrado'} com sucesso!`);
       onProductAdded(); // Atualiza a lista no ProductListados
     } catch (error) {
       toast.error(error.message || "Erro na API.");
@@ -63,7 +90,7 @@ const CadastroProduto = ({ show, onClose, onProductAdded }) => {
     <>
       <Modal show={show} onHide={onClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Cadastrar Produto</Modal.Title>
+          <Modal.Title>{isEditing ? 'Editar Produto' : 'Cadastrar Produto'}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={formik.handleSubmit}>
           <Modal.Body>
@@ -90,7 +117,7 @@ const CadastroProduto = ({ show, onClose, onProductAdded }) => {
               Fechar
             </Button>
             <Button variant="primary" type="submit">
-              Salvar
+              {isEditing ? 'Atualizar' : 'Salvar'}
             </Button>
           </Modal.Footer>
         </Form>
