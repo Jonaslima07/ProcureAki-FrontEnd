@@ -79,18 +79,18 @@ function Header() {
             <Nav.Link as={Link} to="/cadastrarloja" style={headerStyles.navLink}>
               Cadastro de Loja
             </Nav.Link>
-            <Nav.Link as={Link} to="/cadastrocliente" style={headerStyles.navLink}>
+            {/* <Nav.Link as={Link} to="/cadastrocliente" style={headerStyles.navLink}>
               Cadastro de Cliente
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link as={Link} to="/cadastroproduto" style={headerStyles.navLink}>
               Cadastrar produtos
             </Nav.Link>
-            <Nav.Link as={Link} to="/lojacategoria" style={headerStyles.navLink}>
+            {/* <Nav.Link as={Link} to="/lojacategoria" style={headerStyles.navLink}>
               categoria Loja
-            </Nav.Link>
-            <Nav.Link as={Link} to="/login" style={headerStyles.navLink}>
+            </Nav.Link> */}
+            {/* <Nav.Link as={Link} to="/login" style={headerStyles.navLink}>
               Login
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
         </Container>
       </Navbar>
@@ -123,7 +123,7 @@ const headerStyles = {
     lineHeight: '50px',  
     textAlign: 'left',  
     Top: '52px',
-    Left: '15px',
+    left: '15px',
     fontWeight: 500,
     position: 'relative',
   },
@@ -131,7 +131,7 @@ const headerStyles = {
     width: "33px",
     height: "33px",
     position: "relative",
-    right: "2px",
+    left: "13px",
     bottom: "2px",
   },
   divBelowHeader: {
@@ -179,6 +179,6 @@ const headerStyles = {
     backgroundColor: "#444",
   },
   drop: {
-    marginLeft: "1rem",
+    marginLeft: "2rem",
   },
 };

@@ -4,19 +4,19 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
-/* Garantir que a altura dos cards seja suficiente */
+
 .card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 400px; /* Ajuste para garantir que os cards não fiquem muito pequenos */
-    border-radius: 10px; /*add outro*/
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar os cards */
+    height: 400px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     margin-bottom: 20px;
     background-color: #fff;
     transition: transform 0.3s ease-in-out;
-    max-width: 100%; /* Garante que o card ocupe toda a largura disponível */
-    width: 100%; /* Aumenta a largura para 100% da largura do seu container */
+    max-width: 100%; 
+    width: 100%; 
   }
 
 
@@ -24,47 +24,46 @@ body {
   transform: scale(1.05);
 }
 
-/* Ajustando a altura das colunas para garantir que todos os cards fiquem do mesmo tamanho */
+
 .col-md-5 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100%; /* Aumenta o tamanho da coluna que contém os cards, ajustando sua largura */
-    width: 100%; /* Ajusta a largura da coluna */
-    margin: 0 auto; /* Centraliza a coluna */
+    max-width: 100%; 
+    width: 100%; 
+    margin: 0 auto;
   }
 
 .card-img-top {
   border-radius: 15px 15px 0 0;
-  width: 400px; /* A imagem ocupa toda a largura do card */
-  height: auto; /* Mantém a proporção da imagem */
-  height: 400px; /* Ajuste para manter o tamanho das imagens igual */
-  position: absolute; /* A imagem vai ocupar o card inteiro */
+  width: 400px; 
+  height: auto; 
+  height: 400px; 
+  position: absolute; 
   object-fit: cover;
   top: 0;
   left: 0;
-  z-index: 0; /* A imagem vai ficar atrás do conteúdo */
-  object-fit: cover; /* Faz a imagem cobrir toda a área do card sem distorcer */
+  z-index: 0; 
+  object-fit: cover; 
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .card-body {
   padding: 20px;
-  background-color: transparent; /* Remover o fundo para que a imagem apareça */
-  position: relative; /* Necessário para garantir que o conteúdo do card sobreponha a imagem */
-  z-index: 1; /* Garante que o conteúdo fique acima da imagem */
+  background-color: transparent; 
+  position: relative; 
+  z-index: 1;
   display: flex;
-  justify-content: center; /* Centraliza o conteúdo horizontalmente */
-  align-items: center; /* Centraliza o conteúdo verticalmente */
-  text-align: center; /* Garante que o texto esteja centralizado */
-  font-family: 'Ubuntu', sans-serif; /* Definindo a fonte */
-  font-weight: 500; /* Peso da fonte */
-  font-size: 50px; /* Tamanho da fonte */
-  line-height: 100%; /* Altura da linha */
-  letter-spacing: 0%; /* Espaçamento entre as letras */
-  height: 200px; /* Ajuste a altura do card para acomodar o texto */
-}
+  justify-content: center; 
+  align-items: center; 
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif; 
+  font-weight: 500; 
+  font-size: 50px; 
+  line-height: 100%; 
+  letter-spacing: 0%; 
+  height: 200px; 
 
 
 .row.justify-content-center {
@@ -180,4 +179,5 @@ body {
     }
   }
   
+}
 }

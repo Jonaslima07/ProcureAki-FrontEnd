@@ -85,7 +85,7 @@ const LojaCategoria = () => {
                     alt="Ícone horário"
                     style={styles.iconrelogio}
                   />
-                  <p style={styles.ptempo}>{loja.horario_funcionamento}</p>
+                  <p style={styles.ptempo}>{loja.horario_abertura} - {loja.horario_fechamento}</p>
                 </div>
                 <a href={loja.site || "#"} style={styles.storeLink}>
                   <img
@@ -140,16 +140,16 @@ const styles = {
     gap: "15px"
   },
   listItemImage: {
-    width: "60px",
-    height: "60px",
-    borderRadius: "50%",
+    width: "50px",
+    height: "50px",
     objectFit: "cover"
   },
   nomeLoja: {
     margin: "0",
-    color: "#001F2D",
-    fontSize: "20px",
-    fontWeight: "500"
+    color: "white",
+    fontSize: "22px",
+    fontWeight: "bold",
+    
   },
   storeDetails: {
     display: "flex",
@@ -168,12 +168,13 @@ const styles = {
   },
   locationIcon: {
     width: "20px",
-    height: "20px"
+    height: "20px",
+    color:"white"
   },
   endereco: {
     margin: "0",
-    color: "#495057",
-    fontSize: "14px"
+    color: "white",
+    fontSize: "20px"
   },
   icontel: {
     width: "20px",
@@ -181,8 +182,8 @@ const styles = {
   },
   pnum: {
     margin: "0",
-    color: "#495057",
-    fontSize: "14px"
+    color: "white",
+    fontSize: "22px"
   },
   iconrelogio: {
     width: "20px",
@@ -190,8 +191,8 @@ const styles = {
   },
   ptempo: {
     margin: "0",
-    color: "#495057",
-    fontSize: "14px"
+    color: "white",
+    fontSize: "22px"
   },
   storeLink: {
     display: "flex",
@@ -211,7 +212,7 @@ const styles = {
     padding: "8px 15px",
     borderRadius: "5px",
     cursor: "pointer",
-    fontSize: "14px"
+    fontSize: "22px"
   },
   loading: {
     textAlign: "center",

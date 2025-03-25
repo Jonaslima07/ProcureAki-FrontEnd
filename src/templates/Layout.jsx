@@ -4,7 +4,7 @@ import HeaderProdutos from '../components/HeaderProdutos';
 import HeaderLoja from '../components/HeaderLoja';  
 import Footer from '../components/Footer';
 import { Outlet, useLocation } from 'react-router-dom';
-import FooterLimpo from '../components/FooterLimpo';
+// import FooterLimpo from '../components/FooterLimpo';
 
 const Layout = () => {
   const location = useLocation();
@@ -23,8 +23,8 @@ const Layout = () => {
   return (
     <>
       {isHomePage && <Header />}
-      {isCadastrarProdutosPage && <HeaderProdutos />}  {/* Renderizando o HeaderProdutos na rota específica */}
-      {isCadastroClientePage && <HeaderProdutos />}  {/* Renderizando o HeaderProdutos na rota específica */}
+      {isCadastrarProdutosPage && <HeaderProdutos />} 
+      {isCadastroClientePage && <HeaderProdutos />} 
       {isCadastroLojaPage && <HeaderLoja />}
       {isLojascadastradasPage && <HeaderLoja/>}
       {isLoginPage && <HeaderLoja />}
@@ -36,9 +36,10 @@ const Layout = () => {
       </Container>
 
       {isHomePage && <Footer />}
-      {isCadastrarProdutosPage && <FooterLimpo />}
-      {isCadastroLojaPage && <FooterLimpo />}
-      {/* {isLojascadastradasPage && <FooterLimpo />} */}
+      {isCadastrarProdutosPage && <Footer />}
+      {/* {isCadastroClientePage && <Footer />} */}
+      {/* {isCadastroLojaPage && <Footer />} */}
+      
        
     </>
   );

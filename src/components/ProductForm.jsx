@@ -20,7 +20,7 @@ const CadastroProduto = ({ show, onClose, onProductAdded, productToEdit }) => {
   useEffect(() => {
     if (productToEdit) {
       setIsEditing(true);
-      // Preenche os valores do formulário com os dados do produto a ser editado
+      
       formik.setValues({
         nome: productToEdit.nome,
         descricao: productToEdit.descricao,
@@ -31,7 +31,7 @@ const CadastroProduto = ({ show, onClose, onProductAdded, productToEdit }) => {
       });
     } else {
       setIsEditing(false);
-      // Reseta os valores do formulário para cadastro novo
+      
       formik.resetForm();
     }
   }, [productToEdit]);
@@ -67,7 +67,7 @@ const CadastroProduto = ({ show, onClose, onProductAdded, productToEdit }) => {
       }
 
       toast.success(`Produto ${isEditing ? 'atualizado' : 'cadastrado'} com sucesso!`);
-      onProductAdded(); // Atualiza a lista no ProductListados
+      onProductAdded(); 
     } catch (error) {
       toast.error(error.message || "Erro na API.");
     }

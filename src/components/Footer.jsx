@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <>
-      <div style={FooterStyles.divBelowFooter}></div> {/* Linha acima do footer */}
+      <div style={FooterStyles.divBelowFooter}></div> 
       
       <footer style={FooterStyles.footer}>
         <div style={FooterStyles.content}>
@@ -27,11 +27,13 @@ const FooterStyles = {
     padding: '2rem 0',
     textAlign: 'center',
     width: '100%',
+    position:"relative",
+    
   },
   divBelowFooter: {
-    backgroundColor: '#001F2D', // Cor da linha
-    width: '100%', // Largura da div (100% da largura do contêiner pai)
-    height: '5px', // Altura da div (ajustada para ser uma linha fina)
+    backgroundColor: '#001F2D', 
+    width: '100%', 
+    height: '5px', 
   },
   content: {
     maxWidth: '1200px',

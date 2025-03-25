@@ -1,7 +1,7 @@
 
 import { Row, Col } from "react-bootstrap";
 
-import { FaCommentAlt, FaMapMarkerAlt, FaBuilding } from "react-icons/fa"; 
+import { FaMapMarkerAlt } from "react-icons/fa"; 
 
 const ProcuraAkiSection = () => {
   return (
@@ -71,10 +71,10 @@ const headerStyles = {
   },
   procureAkiText: {
     fontFamily: 'Ubuntu',
-    fontWeight: '400', // Peso ajustado para 500
-    fontSize: '22px', // Tamanho da fonte ajustado para 18px
-    lineHeight: "100%", // Line-height ajustado para 100%
-    letterSpacing: '0%', // Espaçamento de letras ajustado para 0%
+    fontWeight: '400', 
+    fontSize: '22px', 
+    lineHeight: "100%", 
+    letterSpacing: '0%', 
     color: '#001F2D'
   },
   listStyle: {

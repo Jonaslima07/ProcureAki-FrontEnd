@@ -43,7 +43,7 @@ const ProductListados = () => {
       });
       
       if (response.ok) {
-        fetchProducts(); // Atualiza a lista após exclusão
+        fetchProducts(); 
       } else {
         console.error('Erro ao excluir produto');
       }
@@ -136,7 +136,7 @@ const ProductListados = () => {
         productToEdit={editingProduct}
       />
 
-      {/* Modal de confirmação para exclusão */}
+     
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmar Exclusão</Modal.Title>
@@ -169,7 +169,8 @@ const styles = {
   button: {
     width: '258px',
     height: '57px',
-    marginTop: '20px',
+    top: '55px',
+    position:"relative",
     padding: '10px 20px',
     fontSize: '16px',
     backgroundColor: '#006D77',

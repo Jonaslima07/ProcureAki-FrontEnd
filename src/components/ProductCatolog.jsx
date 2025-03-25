@@ -24,9 +24,7 @@ const ProductCatalog = () => {
                 alavancar suas vendas.
               </li>
             </ul>
-            {/* <Button style={styles.button} onClick={handleShowForm}>
-            Cadastrar produto
-          </Button> */}
+           
         </Col>
       </Row>
       <Row>
@@ -53,48 +51,51 @@ const styles = {
     textAlign: 'center',
     paddingTop: '50px',
     fontFamily: 'Arial, sans-serif',
+    
   },
   titleList: {
-    listStyle: 'none',  // Remove os marcadores das listas
-    padding: 0,         // Remove o preenchimento
-    margin: '0 auto',   // Centraliza a lista
-    width: '503px',     // Define a largura
-    lineHeight: '0.00',  // Ajuste de altura de linha para melhorar a leitura
+    listStyle: 'none',  
+    padding: 0,         
+    margin: '0 auto',   
+    width: '503px',     
+    lineHeight: '0.00',  
     letterSpacing: '0',
+    position:"relative",
+    top:"15px"
     
   },
   
   titleone: {
     width: '503px',
-    height: 'auto',  // Corrigido para permitir o ajuste da altura conforme o conteúdo
+    height: 'auto',  
     fontSize: '24px',
     color: '#333',
     fontWeight: 400,
-    lineHeight: '0.00',  // Ajuste de altura de linha para melhorar a leitura
+    lineHeight: '0.00',  
     letterSpacing: '0',
     position: 'relative',
     margin: '0 auto',
     paddingBottom: '20px',
-    wordWrap: 'break-word',  // Quebra as palavras para se ajustar no tamanho da caixa
-    whiteSpace: 'normal',  // Permite que as palavras se quebrem
+    wordWrap: 'break-word',  
+    whiteSpace: 'normal', 
     bottom:"8rem",
     
   },
 
   titletwo: {
     width: '503px',
-    height: 'auto',  // Corrigido para permitir o ajuste da altura conforme o conteúdo
+    height: 'auto', 
     fontSize: '24px',
     color: '#333',
     fontWeight: 400,
-    lineHeight: '0.6',  // Ajuste de altura de linha para melhorar a leitura
+    lineHeight: '0.6',  
     letterSpacing: '0',
     position: 'relative',
     margin: '0 auto',
     paddingBottom: '20px',
-    wordWrap: 'break-word',  // Quebra as palavras para se ajustar no tamanho da caixa
-    whiteSpace: 'normal',  // Permite que as palavras se quebrem
-    display: 'inline-block',  // Permite o controle do alinhamento
+    wordWrap: 'break-word',  
+    whiteSpace: 'normal',  
+    display: 'inline-block', 
     marginBottom: '10px',
     left: '-28px',
     bottom:"8rem",
@@ -102,19 +103,19 @@ const styles = {
 
   titlethree: {
     width: '503px',
-    height: 'auto',  // Corrigido para permitir o ajuste da altura conforme o conteúdo
+    height: 'auto',  
     fontSize: '24px',
     color: '#333',
     fontWeight: 400,
-    lineHeight: '0.0',  // Ajuste de altura de linha para melhorar a leitura
+    lineHeight: '0.0',  
     letterSpacing: '0',
     position: 'relative',
     margin: '0 auto',
     paddingBottom: '20px',
-    wordWrap: 'break-word',  // Quebra as palavras para se ajustar no tamanho da caixa
-    whiteSpace: 'normal',  // Permite que as palavras se quebrem
-    display: 'inline-block',  // Permite o controle do alinhamento
-    marginBottom: '1px',     // Ajuste de espaçamento entre os títulos
+    wordWrap: 'break-word', 
+    whiteSpace: 'normal',  
+    display: 'inline-block',  
+    marginBottom: '1px',    
     left: '-112px',
     //top: '-20px',  // Ajusta a posição para cima
     transform: 'translateY(-10px)',  // Ajusta ainda mais a posição do texto para cima
@@ -154,7 +155,7 @@ const styles = {
     color: '#333',
     width: '187px',  // Largura do texto
     height: '31px',  // Altura do texto
-    top: '-18px',   // Posição para mover o texto para baixo
+    top: '-20px',   // Posição para mover o texto para baixo
     //transform: 'translateY(-10px)',  // Ajusta ainda mais a posição do texto para cima
     fontWeight: 600,  // Peso da fonte
     right:"80px",

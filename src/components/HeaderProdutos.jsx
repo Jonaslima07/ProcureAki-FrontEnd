@@ -8,9 +8,9 @@ const HeaderProdutos = () => {
           <Nav.Link href="/" style={textoProcureAk}>ProcureAki<img src="/img/locationwhite2.png" alt="locationwhiteicon" className="img-fluid" style={Locationwhite}  /></Nav.Link>
           
         </Navbar.Brand>
-        <Nav className="ms-auto">
+        {/* <Nav className="ms-auto">
           <Nav.Link href="/" style={greetingStyle}>Olá, Mundo Bike<img src="/img/casaheader2.png" alt="casaheader2" className="img-fluid" style={CasaIcon}  /></Nav.Link> 
-        </Nav>
+        </Nav> */}
       </Container>
     </Navbar>
   );
@@ -24,21 +24,21 @@ const headerStyle = {
     
   };
 
-  const greetingStyle = {
-    fontWeight: 500,
-    fontSize: '30px', 
-    lineHeight: '1.2',  
-    letterSpacing: '0',  
-    width: '186px',  
-    height: '49px',  
-    top: '882px',  
-    left: '782px',  
-    color: 'white',  
-    position: 'center',  
-    whiteSpace: 'nowrap',  
-    marginRight: '10rem', 
+  // const greetingStyle = {
+  //   fontWeight: 500,
+  //   fontSize: '30px', 
+  //   lineHeight: '1.2',  
+  //   letterSpacing: '0',  
+  //   width: '186px',  
+  //   height: '49px',  
+  //   top: '882px',  
+  //   left: '782px',  
+  //   color: 'white',  
+  //   position: 'center',  
+  //   whiteSpace: 'nowrap',  
+  //   marginRight: '10rem', 
     
-  };
+  // };
   
   const textoProcureAk = {
     
@@ -67,15 +67,15 @@ const headerStyle = {
     left: '1px'
   };
 
-  const CasaIcon = {
-    width: '47px',
-    height: '45px',
-    Top: '887px',
-    Left: '734',
-    lineHeight: '50px', 
-    position: 'relative',
-    top: '-5px',
-    left: '-281px',
+  // const CasaIcon = {
+  //   width: '47px',
+  //   height: '45px',
+  //   Top: '887px',
+  //   Left: '734',
+  //   lineHeight: '50px', 
+  //   position: 'relative',
+  //   top: '-5px',
+  //   left: '-281px',
     
     
-  }
+  // }

@@ -1,11 +1,11 @@
-import React from 'react';
+
 
 function FooterLimpo() {
   return (
     <> 
       <footer style={FooterStyles.footer}>
         <div style={FooterStyles.content}>   
-          {/* Conteúdo do footer */}
+          
         </div>
       </footer>
     </>
@@ -22,11 +22,11 @@ const FooterStyles = {
     textAlign: 'center',
     width: '100%',          
     height: '75px',         
-    position: 'sticky',     // Posicionamento sticky para ficar no final do conteúdo
-    bottom: '0',            // Fixa o footer na parte inferior do conteúdo
+    position: 'sticky',     
+    bottom: '0',            
     left: '0',              
     zIndex: '1000',
-    marginTop: '70px',         // Garante que o footer fique acima de outros elementos
+    marginTop: '70px',         
   },
 
   content: {
