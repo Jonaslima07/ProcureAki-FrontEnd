@@ -1,14 +1,12 @@
-//codigo sozinho
-
 import  { useState } from 'react';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
 const ProductCatalog = () => {
 
   const [showForm, setShowForm] = useState(false);
 
-  const handleShowForm = () => setShowForm(true);
+  // const handleShowForm = () => setShowForm(true);
   const handleCloseForm = () => setShowForm(false);
 
   return (
@@ -26,9 +24,9 @@ const ProductCatalog = () => {
                 alavancar suas vendas.
               </li>
             </ul>
-            <Button style={styles.button} onClick={handleShowForm}>
+            {/* <Button style={styles.button} onClick={handleShowForm}>
             Cadastrar produto
-          </Button>
+          </Button> */}
         </Col>
       </Row>
       <Row>
@@ -186,6 +184,6 @@ const styles = {
     backgroundColor: '#006D77',
     width: '1295px',
     height: '5px',
-    marginTop: '10',
-  }
+    marginTop:'10',
+}
 };
