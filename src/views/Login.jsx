@@ -1,10 +1,11 @@
-import LoginForm from '../components/LoginForm';
-import FooterLimpo from '../components/FooterLimpo';
+// import LoginForm from '../components/LoginForm';
+import LojaProcategoria from '../components/LojaProcategoria'
 
 const Login = () => {
   return (
    <>
-      <LoginForm/>
+      <LojaProcategoria/>
+      {/* <LoginForm/> */}
    </>
   );
 };
