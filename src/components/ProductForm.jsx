@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -12,7 +13,7 @@ const schema = Yup.object({
   imagem_url: Yup.string().url("Deve ser uma URL válida").required("URL da imagem é obrigatória"),
   loja_id: Yup.number().required("Loja_id é obrigatória"),
 });
-/* eslint-disable react/prop-types */
+
 const CadastroProduto = ({ show, onClose, onProductAdded }) => {
   const handleSubmit = async (values) => {
     const dadosParaEnviar = {
@@ -61,9 +62,9 @@ const CadastroProduto = ({ show, onClose, onProductAdded }) => {
   return (
     <>
       <Modal show={show} onHide={onClose}>
-        {/* <Modal.Header closeButton>
+        <Modal.Header closeButton>
           <Modal.Title>Cadastrar Produto</Modal.Title>
-        </Modal.Header> */}
+        </Modal.Header>
         <Form onSubmit={formik.handleSubmit}>
           <Modal.Body>
             {Object.keys(formik.initialValues).map((field) => (

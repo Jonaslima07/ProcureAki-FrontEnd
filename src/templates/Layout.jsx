@@ -9,7 +9,7 @@ import FooterLimpo from '../components/FooterLimpo';
 const Layout = () => {
   const location = useLocation();
 
-  console.log('Current path:', location.pathname);  
+  console.log('path:', location.pathname);  
 
   const isHomePage = location.pathname === '/' || location.pathname === '/home';
   const isCadastrarProdutosPage = location.pathname === '/cadastroproduto';
@@ -26,6 +26,7 @@ const Layout = () => {
       {isCadastrarProdutosPage && <HeaderProdutos />}  {/* Renderizando o HeaderProdutos na rota específica */}
       {isCadastroClientePage && <HeaderProdutos />}  {/* Renderizando o HeaderProdutos na rota específica */}
       {isCadastroLojaPage && <HeaderLoja />}
+      {isLojascadastradasPage && <HeaderLoja/>}
       {isLoginPage && <HeaderLoja />}
       
       <Container>
@@ -36,6 +37,8 @@ const Layout = () => {
 
       {isHomePage && <Footer />}
       {isCadastrarProdutosPage && <FooterLimpo />}
+      {isCadastroLojaPage && <FooterLimpo />}
+      {/* {isLojascadastradasPage && <FooterLimpo />} */}
        
     </>
   );

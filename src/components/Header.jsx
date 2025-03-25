@@ -1,5 +1,5 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Header() {
   const [categorias, setCategorias] = useState([]);
+  const navigate = useNavigate();
 
   const fetchCategorias = async () => {
     try {
@@ -14,7 +15,6 @@ function Header() {
       const data = await res.json();
       console.log(data);
 
-      // Agrupar categorias por nome e exibir apenas uma vez por nome
       const categoriasUnicas = [];
       const seenCategorias = new Set();
 
@@ -35,6 +35,10 @@ function Header() {
   useEffect(() => {
     fetchCategorias();
   }, []);
+
+  const handleCategoriaClick = (nomeCategoria) => {
+    navigate(`/lojacategoria/${nomeCategoria}`);
+  };
 
   return (
     <>
@@ -57,12 +61,16 @@ function Header() {
             <Dropdown.Menu>
               {categorias.length > 0 ? (
                 categorias.map((categoria) => (
-                  <Dropdown.Item style={headerStyles.item} key={categoria.id} href={`#categoria-${categoria.nome_categoria}`}>
+                  <Dropdown.Item 
+                    style={headerStyles.item} 
+                    key={categoria.id} 
+                    onClick={() => handleCategoriaClick(categoria.nome_categoria)}
+                  >
                     {categoria.nome_categoria}
                   </Dropdown.Item>
                 ))
               ) : (
-                <Dropdown.Item disabled>Carregando...</Dropdown.Item>
+                <Dropdown.Item disabled>Nenhum categoria encontrada</Dropdown.Item>
               )}
             </Dropdown.Menu>
           </Dropdown>
@@ -118,7 +126,6 @@ const headerStyles = {
     Left: '15px',
     fontWeight: 500,
     position: 'relative',
-    
   },
   logo: {
     width: "33px",
@@ -159,16 +166,19 @@ const headerStyles = {
     textTransform: "none",
   },
   item: {
-    backgroundColor: "white", // Fundo preto
-    color: "black", // Texto branco
-    padding: "10px 15px", // Espaçamento interno
-    borderRadius: "5px", // Bordas arredondadas
-    transition: "background-color 0.3s ease", // Transição suave
+    backgroundColor: "white",
+    color: "black",
+    padding: "10px 15px",
+    borderRadius: "5px",
+    transition: "background-color 0.3s ease",
+    textDecoration: "none",
+    display: "block",
+    cursor: "pointer",
   },
   itemHover: {
-    backgroundColor: "#444", // Cor ao passar o mouse
+    backgroundColor: "#444",
   },
-  drop:{
-    marginLeft:"1rem"
-  }
+  drop: {
+    marginLeft: "1rem",
+  },
 };

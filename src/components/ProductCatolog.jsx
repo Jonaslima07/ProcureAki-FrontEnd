@@ -77,7 +77,7 @@ const styles = {
     paddingBottom: '20px',
     wordWrap: 'break-word',  // Quebra as palavras para se ajustar no tamanho da caixa
     whiteSpace: 'normal',  // Permite que as palavras se quebrem
-    
+    bottom:"8rem",
     
   },
 
@@ -96,7 +96,8 @@ const styles = {
     whiteSpace: 'normal',  // Permite que as palavras se quebrem
     display: 'inline-block',  // Permite o controle do alinhamento
     marginBottom: '10px',
-    left: '-28px'
+    left: '-28px',
+    bottom:"8rem",
   },
 
   titlethree: {
@@ -117,6 +118,7 @@ const styles = {
     left: '-112px',
     //top: '-20px',  // Ajusta a posição para cima
     transform: 'translateY(-10px)',  // Ajusta ainda mais a posição do texto para cima
+    bottom:"8rem",
     
   },
 
@@ -144,22 +146,23 @@ const styles = {
     width: '121px',
     height: '121px',
     margin: '0 auto',
+    bottom:'30px'
   },
   text: {
     marginTop: '10px',
-    fontSize: '18px',
+    fontSize: '20px',
     color: '#333',
     width: '187px',  // Largura do texto
     height: '31px',  // Altura do texto
     top: '-18px',   // Posição para mover o texto para baixo
     //transform: 'translateY(-10px)',  // Ajusta ainda mais a posição do texto para cima
     fontWeight: 600,  // Peso da fonte
-   
+    right:"80px",
     lineHeight: '100%', // Altura da linha
     letterSpacing: '0%', // Espaçamento entre as letras
-    left: '500px',   // Posição horizontal
+    left: '450px',   // Posição horizontal
     position: 'relative', // Garantir que as propriedades de top e left funcionem corretamente
-    transform: 'translateX(50px)', // Move o texto 50px para a direita
+    // transform: 'translateX(50px)', // Move o texto 50px para a direita
     alignItems: "center", // Alinha o texto no centro (se necessário)
     textAlign: 'center',  // Centraliza o texto
     
@@ -176,7 +179,7 @@ const styles = {
     lineHeight: '100%',  // Ajuste de altura de linha para melhorar a leitura
     letterSpacing: '0',
     position: 'relative', // Ajusta a posição do texto
-    top: '16px',  // Move o texto para baixo
+    top: '20px',  // Move o texto para baixo
     
   },
 
@@ -184,6 +187,6 @@ const styles = {
     backgroundColor: '#006D77',
     width: '1295px',
     height: '5px',
-    marginTop:'10',
-}
+    marginTop: '10px',
+  }
 };

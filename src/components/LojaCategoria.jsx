@@ -1,256 +1,236 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const LojaCategoria = () => {
+  const { nomeCategoria } = useParams();
+  const [lojas, setLojas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchLojasPorCategoria = async () => {
+      try {
+        if (!nomeCategoria) {
+          throw new Error("Categoria não especificada");
+        }
+
+        const response = await fetch(`https://procureaki.onrender.com/lojas/${nomeCategoria}`);
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.mensagem || "Erro ao buscar lojas");
+        }
+
+        const data = await response.json();
+        setLojas(data);
+      } catch (err) {
+        setError(err.message || "Erro ao carregar lojas");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLojasPorCategoria();
+  }, [nomeCategoria]);
+
+  if (loading) {
+    return <div style={styles.loading}>Carregando...</div>;
+  }
+
+  if (error) {
+    return <div style={styles.error}>{error}</div>;
+  }
+  
+  console.log(nomeCategoria);
+
   return (
     <div style={styles.container}>
-      <h2 style={styles.h2}>Lojas correspondentes a categoria "Varejo"</h2>
+      <h2 style={styles.h2}>Lojas correspondentes à categoria: {nomeCategoria}</h2>
 
-      <div style={styles.listGroup}>
-        <div style={styles.listGroupItem}>
-          <div style={styles.storeWrapper}>
-            <div style={styles.listItemDiv}>
-              <img src="/img/imagemcasaveia.png" alt="Ícone 1" style={styles.listItemImage} />
-              <h5 style={styles.mundoBike}>Mundo Bike</h5>
-            </div>
-            <div style={styles.storeDetails}>
-              <div style={styles.addressWrapper}>
-                <img src="/img/locationwhite2.png" alt="Ícone localização" style={styles.locationIcon} />
-                <p style={styles.p}>Avenida Luiz Gonzaga, Centro, Campina Grande</p>
+      {lojas.length > 0 ? (
+        lojas.map((loja) => (
+          <div style={styles.listGroupItem} key={loja.id}>
+            <div style={styles.storeWrapper}>
+              <div style={styles.listItemDiv}>
+                <img
+                  src="/img/imagemcasaveia.png"
+                  alt={`Ícone ${loja.nome}`}
+                  style={styles.listItemImage}
+                />
+                <h5 style={styles.nomeLoja}>{loja.nome}</h5>
               </div>
-              <div style={styles.contactWrapper}>
-                <img src="/img/tel.png" alt="Ícone telefone" style={styles.icontel} />
-                <p style={styles.pnum}>83 98967-0000</p>
-              </div>
-              <div style={styles.contactWrapper}>
-                <img src="/img/relogio.png" alt="Ícone horário" style={styles.iconrelogio} />
-                <p style={styles.ptempo}>08:00 - 17:00</p>
-              </div>
-              <a href="https://www.lojamundobike.com" style={styles.storeLink}>
-                <img src="/img/setadebarra.png" alt="Ícone loja" style={styles.iconloja} />
-                  {/* <p style={styles.lojap}>Acessar Loja</p> */}
+              <div style={styles.storeDetails}>
+                <div style={styles.addressWrapper}>
+                  <img
+                    src="/img/locationwhite2.png"
+                    alt="Ícone localização"
+                    style={styles.locationIcon}
+                  />
+                  <p style={styles.endereco}>
+                    {loja.endereco.logradouro}, {loja.endereco.bairro}, {loja.endereco.cidade}
+                  </p>
+                </div>
+                <div style={styles.contactWrapper}>
+                  <img
+                    src="/img/tel.png"
+                    alt="Ícone telefone"
+                    style={styles.icontel}
+                  />
+                  <p style={styles.pnum}>{loja.telefone}</p>
+                </div>
+                <div style={styles.contactWrapper}>
+                  <img
+                    src="/img/relogio.png"
+                    alt="Ícone horário"
+                    style={styles.iconrelogio}
+                  />
+                  <p style={styles.ptempo}>{loja.horario_funcionamento}</p>
+                </div>
+                <a href={loja.site || "#"} style={styles.storeLink}>
+                  <img
+                    src="/img/setadebarra.png"
+                    alt="Ícone loja"
+                    style={styles.iconloja}
+                  />
                   <button style={styles.button}>Acessar Loja</button>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div style={styles.listGroupItem}>
-          <div style={styles.storeWrapper}>
-            <div style={styles.listItemDiv}>
-              <img src="/img/imagemcasaveia.png" alt="Ícone 1" style={styles.listItemImage} />
-              <h5 style={styles.mundoBike}>Mundo Bike</h5>
-            </div>
-            <div style={styles.storeDetails}>
-              <div style={styles.addressWrapper}>
-                <img src="/img/locationwhite2.png" alt="Ícone localização" style={styles.locationIcon} />
-                <p style={styles.p}>Avenida Luiz Gonzaga, Centro, Campina Grande</p>
-              </div>
-              <div style={styles.contactWrapper}>
-                <img src="/img/tel.png" alt="Ícone telefone" style={styles.icontel} />
-                <p style={styles.pnum}>83 98967-0000</p>
-              </div>
-              <div style={styles.contactWrapper}>
-                <img src="/img/relogio.png" alt="Ícone horário" style={styles.iconrelogio} />
-                <p style={styles.ptempo}>08:00 - 17:00</p>
-              </div>
-              <a href="https://www.lojamundobike.com" style={styles.storeLink}>
-                <img src="/img/setadebarra.png" alt="Ícone loja" style={styles.iconloja} />
-                    {/* <p style={styles.lojap}>Acessar Loja</p> */}
-                    <button style={styles.button}>Acessar Loja</button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+        ))
+      ) : (
+        <div style={styles.noResults}>Nenhuma loja encontrada para esta categoria</div>
+      )}
+      
     </div>
   );
 };
 
-// Constante de Estilos
 const styles = {
   container: {
-    // padding: '20px', antes testem
-    // backgroundColor: '#f8f9fa',
-    // minHeight: '100vh'
-      padding: '20px',
-      backgroundColor: '#f8f9fa',
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',  // Centraliza verticalmente
-      
-    
+    padding: "20px",
+    maxWidth: "1200px",
+    margin: "0 auto",
+    backgroundColor: "#f8f9fa",
+    minHeight: "100vh"
   },
-  pnum: {
-    marginBottom: '5px',
-    fontSize: '20px',
-    fontWeight: '400',
-    lineHeight: '100%',
-    color: '#ffffff',
-    position: 'relative',
-    marginLeft: '1px', // Espaçamento entre o ícone e o texto
-    top: '10px',
-  },
-  icontel: {
-    width: '24px',
-    height: '24px',
-    marginRight: '10px', // Espaço entre o ícone e o texto
-    position: 'relative',
-    left: '0',
-    top: '7px',
-    marginLeft: '3px', // Espaçamento entre o ícone e o texto
-  },
-  iconloja: {
-    width: '30',
-    height: '24px',
-    marginRight: '10px', // Espaço entre o ícone e o texto
-    position: 'relative',
-    left: '10',
-    top: '-72px',
-    marginLeft: '-460px',
-
-  },
-  // lojap:{
-  //   marginBottom: '5px',
-  //   fontSize: '20px',
-  //   fontWeight: '400',
-  //   lineHeight: '100%',
-  //   color: '#ffffff',
-  //   position: 'relative',
-  //   marginLeft: '1px', // Espaçamento entre o ícone e o texto
-  //   top: '-70px',
-
-  // },
-
   h2: {
-    textAlign: 'center',
-    marginBottom: '30px',
-    position: 'relative',
-    fontWeight: 'bold',
-    top: '-46px',
-    color: '#006D77',
-
-  },
-  listGroup: {
-    listStyleType: 'none',
-    padding: '0'
+    marginBottom: "30px",
+    color: "#006D77",
+    textAlign: "center",
+    fontSize: "28px",
+    fontWeight: "600"
   },
   listGroupItem: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: '15px',
-    marginBottom: '15px',
-    backgroundColor: '#ffffff',
-    border: '1px solid #ddd',
-    borderRadius: '5px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)'
+    backgroundColor: "#006D77",
+    borderRadius: "8px",
+    padding: "20px",
+    marginBottom: "20px",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
   },
   storeWrapper: {
-    display: 'flex',
-    backgroundColor: '#006D77',  // Cor verde para toda a div
-    padding: '15px',
-    borderRadius: '5px',
-    width: '100%'
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px"
   },
   listItemDiv: {
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: '15px'
+    display: "flex",
+    alignItems: "center",
+    gap: "15px"
   },
   listItemImage: {
-    width: '36px',
-    height: '36px',
-    marginRight: '15px',
-    borderRadius: '5px',
-    position: 'relative',
-    top: '-55px',
+    width: "60px",
+    height: "60px",
+    borderRadius: "50%",
+    objectFit: "cover"
   },
-  mundoBike: {
-    fontWeight: '400',
-    fontSize: '24px',
-    lineHeight: '100%',
-    letterSpacing: '0%',
-    position: 'relative',
-    top: '-52px',
-    color: 'white'
-  },
-  iconrelogio: {
-    width: '30px',
-    height: '30px',
-    marginRight: '10px', // Espaço entre o ícone e o texto
-    position: 'relative',
-    left: '-190px',
-    top: '-30px',
+  nomeLoja: {
+    margin: "0",
+    color: "#001F2D",
+    fontSize: "20px",
+    fontWeight: "500"
   },
   storeDetails: {
-    flex: 1,
-    color: 'white' // Cor do texto para contraste com o fundo verde
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px"
   },
   addressWrapper: {
-    display: 'flex',
-    alignItems: 'center', // Alinha a imagem e o texto verticalmente
-    marginBottom: '10px'
+    display: "flex",
+    alignItems: "center",
+    gap: "10px"
   },
   contactWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '10px'
-  },
-  p: {
-    marginBottom: '5px',
-    fontSize: '20px',
-    fontFamily: 'Inter',
-    fontWeight: '400',
-    lineHeight: '100%',
-    letterSpacing: '0%',
-    color: '#ffffff' // Texto em branco para melhor contraste
-  },
-  ptempo: {
-    marginBottom: '5px',
-    position: 'relative',
-    left:'-190px',
-    top: '-26px',
-    fontSize: '20px',
-    fontWeight: '400',
-    lineHeight: '100%',
-    color: '#ffffff', // Texto em branco para melhor contraste
-    marginLeft: '10px', // Espaçamento entre o ícone e o texto
+    display: "flex",
+    alignItems: "center",
+    gap: "10px"
   },
   locationIcon: {
-    width: '28px',
-    height: '28px',
-    marginRight: '10px', // Espaço entre o ícone e o parágrafo
-    alignSelf: 'center', // Centraliza o ícone com o texto
+    width: "20px",
+    height: "20px"
   },
-  icon: {
-    width: '24px',
-    height: '24px',
-    marginRight: '10px',
+  endereco: {
+    margin: "0",
+    color: "#495057",
+    fontSize: "14px"
+  },
+  icontel: {
+    width: "20px",
+    height: "20px"
+  },
+  pnum: {
+    margin: "0",
+    color: "#495057",
+    fontSize: "14px"
+  },
+  iconrelogio: {
+    width: "20px",
+    height: "20px"
+  },
+  ptempo: {
+    margin: "0",
+    color: "#495057",
+    fontSize: "14px"
   },
   storeLink: {
-    display: 'inline-block',
-    color: '#ffffff',
-    textDecoration: 'none',
-    marginTop: '10px',
-    alignItems: 'center',
-    justifyContent: 'center',
-    display: 'flex'
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    textDecoration: "none",
+    marginTop: "15px"
+  },
+  iconloja: {
+    width: "20px",
+    height: "20px"
   },
   button: {
-    backgroundColor: '#099D77',
-    color: 'white',
-    border: 'none',
-    position:'relative',
-    top: '-72px',
-    padding: '3px 2px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    fontSize: '16px',
-    textAlign: 'center',
-    textDecoration: 'none',
+    backgroundColor: "#006D77",
+    color: "white",
+    border: "none",
+    padding: "8px 15px",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "14px"
   },
+  loading: {
+    textAlign: "center",
+    padding: "50px",
+    fontSize: "18px",
+    color: "#006D77"
+  },
+  error: {
+    textAlign: "center",
+    padding: "50px",
+    fontSize: "18px",
+    color: "#dc3545"
+  },
+  noResults: {
+    textAlign: "center",
+    padding: "50px",
+    fontSize: "18px",
+    color: "#6c757d"
+  }
 };
 
 export default LojaCategoria;

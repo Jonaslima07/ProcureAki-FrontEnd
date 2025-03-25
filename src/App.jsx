@@ -4,9 +4,9 @@ import Home from './views/Home.jsx';
 import CadastrarProduto from './views/CadastrarProduto'; 
 import CadastrarLoja from './views/CadastrarLoja.jsx';  
 import CadastroCliente from './views/CadastroCliente.jsx';
+import LojaCategoria from './components/LojaCategoria.jsx';
 import Login from './views/Login.jsx';
 import NoPage from './views/NoPage.jsx';
-import Lojascadastradas from './views/Lojascadastradas.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -28,17 +28,20 @@ function App() {
           element: <CadastroCliente />,
         },
         {
-          path: 'cadastrarLoja',  // Nova rota
+          path: 'cadastrarLoja',
           element: <CadastrarLoja />,
         },
         {
           path: 'login',
           element: <Login />,
         },
-
         {
-          path: 'lojacategoria',  // Nova rota
-          element: <Lojascadastradas />,
+          path: 'lojacategoria/:nomeCategoria',  // Adicione o parâmetro aqui
+          element: <LojaCategoria />,
+        },
+        {
+          path: 'lojacategoria',  // Mantenha esta rota sem parâmetro se necessário
+          element: <LojaCategoria />,
         },
       ],
     },

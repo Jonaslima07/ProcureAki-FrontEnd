@@ -12,8 +12,8 @@ const schema = Yup.object({
   cnpj: Yup.string()
     .matches(/^\d{14}$/, "CNPJ deve ter 14 dígitos")
     .required("CNPJ é obrigatório"),
-  horarioAbertura: Yup.string().required("Horário de abertura é obrigatório"),
-  horarioFechamento: Yup.string().required("Horário de fechamento é obrigatório"),
+  horario_abertura: Yup.string().required("Horário de abertura é obrigatório"),
+  horario_fechamento: Yup.string().required("Horário de fechamento é obrigatório"),
   cep: Yup.string()
     .matches(/^\d{8}$/, "CEP deve ter 8 dígitos")
     .required("CEP é obrigatório"),
@@ -94,7 +94,8 @@ const CadastroLoja = () => {
       nome: values.nomeLoja,
       descricao: values.descricao,
       cnpj: values.cnpj,
-      horario_funcionamento: `${values.horarioAbertura} - ${values.horarioFechamento}`,
+      horario_abertura: values.horario_abertura,
+      horario_funcionamento: values.horario_fechamento,
       telefone: values.telefone,
       email: values.email,
       senha: values.senha,
@@ -158,7 +159,7 @@ const CadastroLoja = () => {
 
   const formik = useFormik({
     initialValues: {
-      nomeLoja: "", descricao: "", cnpj: "", horarioAbertura: "", horarioFechamento: "",
+      nomeLoja: "", descricao: "", cnpj: "", horario_abertura: "", horario_fechamento: "",
       cep: "", nomeRua: "", cidade: "", estado: "", numero: "", telefone: "", email: "",
       senha: "", confirmarSenha: "", categoria: "", bairro:"", latitude:"", longitude:""
     },
@@ -200,7 +201,7 @@ const CadastroLoja = () => {
                     type={
                       field === "email" ? "email" :
                       ["telefone", "cnpj", "cep"].includes(field) ? "tel" :
-                      ["horarioAbertura", "horarioFechamento"].includes(field) ? "time" : "text"
+                      ["horario_abertura", "horario_fechamento"].includes(field) ? "time" : "text"
                     }
                     name={field}
                     onChange={formik.handleChange}
@@ -247,7 +248,9 @@ const CadastroLoja = () => {
                 <td>{loja.nome}</td>
                 <td>{loja.descricao}</td>
                 <td>{loja.cnpj}</td>
-                <td>{loja.horario_funcionamento}</td>
+                <td>{loja.horario_abertura}</td>
+                <td>{loja.horario_fechamento}</td>
+                
                 <td>{loja.endereco.cep}</td>
                 <td>{loja.endereco.logradouro}</td>
                 <td>{loja.endereco.cidade}</td>
@@ -268,8 +271,8 @@ const CadastroLoja = () => {
                         nomeLoja: loja.nome,
                         descricao: loja.descricao,
                         cnpj: loja.cnpj,
-                        horarioAbertura: loja.horario_funcionamento.split(" - ")[0],
-                        horarioFechamento: loja.horario_funcionamento.split(" - ")[1],
+                        horario_abertura: loja.horario_abertura.split(" - ")[0],
+                        horario_fechamento: loja.horario_fechamento.split(" - ")[1],
                         cep: loja.endereco.cep,
                         nomeRua: loja.endereco.logradouro,
                         cidade: loja.endereco.cidade,
